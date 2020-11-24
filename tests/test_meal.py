@@ -11,9 +11,18 @@ from src.sample.meal import MealAPI
     ("lol", None),
     ("Kapuśniak", None)
 ])
-class MealAPISearchMealByNameTests(unittest.TestCase):
+class MealAPISearchMealByNameParameterizedTests(unittest.TestCase):
     def test_search_meal_by_name_tests(self):
         self.assertEqual(self.meal.search_meal_by_name(self.name), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+class MealAPISearchMealByNameTests(unittest.TestCase):
+    def test_search_meal_by_name_test_name(self):
+        meal = self.meal.search_meal_by_name("Pierogi")
+        self.assertEqual(meal['meals'][0]['strMeal'], "Pierogi (Polish Dumplings)")
 
     def setUp(self):
         self.meal = MealAPI()
