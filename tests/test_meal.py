@@ -75,9 +75,18 @@ class MealAPIListAllMealsByFirstLetterRaises(unittest.TestCase):
     ("0", None),
     ("123456", None)
 ])
-class MealAPILookupFullMealDetailsByIdTests(unittest.TestCase):
+class MealAPILookupFullMealDetailsByIdParameterizedTests(unittest.TestCase):
     def test_lookup_full_meal_details_by_id_tests(self):
         self.assertEqual(self.meal.lookup_full_meal_details_by_id(self.id), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+class MealAPILookupFullMealDetailsByIdTests(unittest.TestCase):
+    def test_lookup_full_meal_details_by_id_test_id(self):
+        meal = self.meal.lookup_full_meal_details_by_id("53019")
+        self.assertEqual(meal['meals'][0]['idMeal'], "53019")
 
     def setUp(self):
         self.meal = MealAPI()
