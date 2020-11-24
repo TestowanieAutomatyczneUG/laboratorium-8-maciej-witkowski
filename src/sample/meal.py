@@ -57,3 +57,11 @@ class MealAPI:
         if result['meals'] is None:
             return None
         return result
+
+    def filter_by_area(self, area):
+        if not isinstance(area, str):
+            raise TypeError("Area must be of string type!")
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/filter.php?a={area}').json()
+        if result['meals'] is None:
+            return None
+        return result
