@@ -120,3 +120,37 @@ class MealAPIListAllMealCategoriesTests(unittest.TestCase):
 
     def setUp(self):
         self.meal = MealAPI()
+
+
+class MealAPIListAllCategoriesAreaIngredientsTests(unittest.TestCase):
+    def test_list_all_categories_area_ingredients_tests_categories(self):
+        categories = self.meal.list_all_categories_area_ingredients('c')
+        self.assertEqual(len(categories['meals']), 14)
+
+    def test_list_all_categories_area_ingredients_tests_areas(self):
+        areas = self.meal.list_all_categories_area_ingredients('a')
+        self.assertEqual(len(areas['meals']), 25)
+
+    def test_list_all_categories_area_ingredients_tests_ingredients(self):
+        ingredients = self.meal.list_all_categories_area_ingredients('i')
+        self.assertEqual(len(ingredients['meals']), 571)
+
+    def test_list_all_categories_area_ingredients_tests_wrong_option_0(self):
+        self.assertEqual(self.meal.list_all_categories_area_ingredients('ingredients'), None)
+
+    def test_list_all_categories_area_ingredients_tests_wrong_option_1(self):
+        self.assertEqual(self.meal.list_all_categories_area_ingredients(''), None)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+class MealAPIListAllCategoriesAreaIngredientsRaises(unittest.TestCase):
+    def test_list_all_categories_area_ingredients_raises_0(self):
+        self.assertRaises(TypeError, self.meal.list_all_categories_area_ingredients, 2115)
+
+    def test_list_all_categories_area_ingredients_raises_1(self):
+        self.assertRaises(TypeError, self.meal.list_all_categories_area_ingredients, [])
+
+    def setUp(self):
+        self.meal = MealAPI()
