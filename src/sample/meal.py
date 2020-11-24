@@ -27,3 +27,6 @@ class MealAPI:
         if result['meals'] is None:
             return None
         return result
+
+    def lookup_a_single_random_meal(self):
+        return requests.get('https://www.themealdb.com/api/json/v1/1/random.php').json()
