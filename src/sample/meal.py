@@ -20,10 +20,10 @@ class MealAPI:
             return None
         return result
 
-    def lookup_full_meal_details_by_id(self, id):
-        if not isinstance(id, str):
+    def lookup_full_meal_details_by_id(self, index):
+        if not isinstance(index, str):
             raise TypeError("Id must be of string type!")
-        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}').json()
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={index}').json()
         if result['meals'] is None:
             return None
         return result
@@ -33,3 +33,11 @@ class MealAPI:
 
     def list_all_meal_categories(self):
         return requests.get('https://www.themealdb.com/api/json/v1/1/categories.php').json()
+
+    def list_all_categories_area_ingredients(self, option):
+        if not isinstance(option, str):
+            raise TypeError("Option must be of string type!")
+        if option == 'c' or option == 'a' or option == 'i':
+            return requests.get(f'https://www.themealdb.com/api/json/v1/1/list.php?{option}=list').json()
+        else:
+            return None
