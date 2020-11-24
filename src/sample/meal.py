@@ -30,3 +30,6 @@ class MealAPI:
 
     def lookup_a_single_random_meal(self):
         return requests.get('https://www.themealdb.com/api/json/v1/1/random.php').json()
+
+    def list_all_meal_categories(self):
+        return requests.get('https://www.themealdb.com/api/json/v1/1/categories.php').json()
