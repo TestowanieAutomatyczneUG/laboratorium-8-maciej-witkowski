@@ -169,11 +169,12 @@ class MealAPIFilterByMainIngredientParameterizedTests1(unittest.TestCase):
     def setUp(self):
         self.meal = MealAPI()
 
+
 @parameterized_class(('ing', 'exp'), [
     ("kopytka", None),
     ("kamyki", None)
 ])
-class MealAPIFilterByMainIngredientTests2(unittest.TestCase):
+class MealAPIFilterByMainIngredientParameterizedTests2(unittest.TestCase):
     def test_filter_by_main_ingredient_tests_wrong_input(self):
         self.assertEqual(self.meal.filter_by_main_ingredient(self.ing), self.exp)
 
@@ -181,13 +182,50 @@ class MealAPIFilterByMainIngredientTests2(unittest.TestCase):
         self.meal = MealAPI()
 
 
-@parameterized_class(('inp', 'exp'), [
+@parameterized_class(('ing', 'exp'), [
     (2115, TypeError),
     ([], TypeError)
 ])
 class MealAPIFilterByMainIngredientRaises(unittest.TestCase):
     def test_filter_by_main_ingredient_raises(self):
-        self.assertRaises(self.exp, self.meal.filter_by_main_ingredient, self.inp)
+        self.assertRaises(self.exp, self.meal.filter_by_main_ingredient, self.ing)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+@parameterized_class(('cat', 'exp'), [
+    ("Seafood", 21),
+    ("Vegetarian", 31)
+])
+class MealAPIFilterByCategoryParameterizedTests1(unittest.TestCase):
+    def test_filter_by_category_tests(self):
+        meals = self.meal.filter_by_category(self.cat)
+        self.assertEqual(len(meals['meals']), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+@parameterized_class(('cat', 'exp'), [
+    ("Meat", None),
+    ("", None)
+])
+class MealAPIFilterByCategoryParameterizedTests2(unittest.TestCase):
+    def test_filter_by_category_tests_wrong_input(self):
+        self.assertEqual(self.meal.filter_by_category(self.cat), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+@parameterized_class(('cat', 'exp'), [
+    (2115, TypeError),
+    ([], TypeError)
+])
+class MealAPIFilterByCategoryRaises(unittest.TestCase):
+    def test_filter_by_category_raises(self):
+        self.assertRaises(self.exp, self.meal.filter_by_category, self.cat)
 
     def setUp(self):
         self.meal = MealAPI()
