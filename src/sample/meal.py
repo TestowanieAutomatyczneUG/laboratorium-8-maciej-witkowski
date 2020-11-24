@@ -15,4 +15,7 @@ class MealAPI:
             raise TypeError("Letter must be of string type!")
         if len(letter) == 0 or len(letter) > 1:
             raise ValueError("Wrong input length!")
-        return requests.get(f'https://www.themealdb.com/api/json/v1/1/search.php?f={letter}').json()
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/search.php?s={letter}').json()
+        if result['meals'] is None:
+            return None
+        return result
