@@ -145,12 +145,13 @@ class MealAPIListAllCategoriesAreaIngredientsTests(unittest.TestCase):
         self.meal = MealAPI()
 
 
+@parameterized_class(('inp', 'exp'), [
+    (2115, TypeError),
+    ([], TypeError)
+])
 class MealAPIListAllCategoriesAreaIngredientsRaises(unittest.TestCase):
-    def test_list_all_categories_area_ingredients_raises_0(self):
-        self.assertRaises(TypeError, self.meal.list_all_categories_area_ingredients, 2115)
-
-    def test_list_all_categories_area_ingredients_raises_1(self):
-        self.assertRaises(TypeError, self.meal.list_all_categories_area_ingredients, [])
+    def test_list_all_categories_area_ingredients_raises(self):
+        self.assertRaises(self.exp, self.meal.list_all_categories_area_ingredients, self.inp)
 
     def setUp(self):
         self.meal = MealAPI()
