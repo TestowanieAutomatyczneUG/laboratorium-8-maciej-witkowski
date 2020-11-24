@@ -49,3 +49,11 @@ class MealAPI:
         if result['meals'] is None:
             return None
         return result
+
+    def filter_by_category(self, category):
+        if not isinstance(category, str):
+            raise TypeError("Category must be of string type!")
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/filter.php?c={category}').json()
+        if result['meals'] is None:
+            return None
+        return result
