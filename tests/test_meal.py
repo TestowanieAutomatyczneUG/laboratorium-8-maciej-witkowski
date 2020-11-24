@@ -229,3 +229,40 @@ class MealAPIFilterByCategoryRaises(unittest.TestCase):
 
     def setUp(self):
         self.meal = MealAPI()
+
+
+@parameterized_class(('area', 'exp'), [
+    ("Canadian", 13),
+    ("Polish", 8)
+])
+class MealAPIFilterByAreaParameterizedTests1(unittest.TestCase):
+    def test_filter_by_area_tests(self):
+        meals = self.meal.filter_by_area(self.area)
+        self.assertEqual(len(meals['meals']), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+@parameterized_class(('area', 'exp'), [
+    ("European", None),
+    ("", None)
+])
+class MealAPIFilterByAreaParameterizedTests2(unittest.TestCase):
+    def test_filter_by_area_tests_wrong_input(self):
+        self.assertEqual(self.meal.filter_by_area(self.area), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+@parameterized_class(('area', 'exp'), [
+    (2115, TypeError),
+    ([], TypeError)
+])
+class MealAPIFilterByAreaRaises(unittest.TestCase):
+    def test_filter_by_area_raises(self):
+        self.assertRaises(self.exp, self.meal.filter_by_area, self.area)
+
+    def setUp(self):
+        self.meal = MealAPI()
