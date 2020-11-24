@@ -41,3 +41,11 @@ class MealAPI:
             return requests.get(f'https://www.themealdb.com/api/json/v1/1/list.php?{option}=list').json()
         else:
             return None
+
+    def filter_by_main_ingredient(self, ingredient):
+        if not isinstance(ingredient, str):
+            raise TypeError("Ingredient must be of string type!")
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/filter.php?i={ingredient}').json()
+        if result['meals'] is None:
+            return None
+        return result
