@@ -19,3 +19,11 @@ class MealAPI:
         if result['meals'] is None:
             return None
         return result
+
+    def lookup_full_meal_details_by_id(self, id):
+        if not isinstance(id, str):
+            raise TypeError("Id must be of string type!")
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}').json()
+        if result['meals'] is None:
+            return None
+        return result
