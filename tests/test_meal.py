@@ -155,3 +155,39 @@ class MealAPIListAllCategoriesAreaIngredientsRaises(unittest.TestCase):
 
     def setUp(self):
         self.meal = MealAPI()
+
+
+@parameterized_class(('ing', 'exp'), [
+    ("chicken_breast", 9),
+    ("carrot", 5)
+])
+class MealAPIFilterByMainIngredientParameterizedTests1(unittest.TestCase):
+    def test_filter_by_main_ingredient_tests(self):
+        meals = self.meal.filter_by_main_ingredient(self.ing)
+        self.assertEqual(len(meals['meals']), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+@parameterized_class(('ing', 'exp'), [
+    ("kopytka", None),
+    ("kamyki", None)
+])
+class MealAPIFilterByMainIngredientTests2(unittest.TestCase):
+    def test_filter_by_main_ingredient_tests_wrong_input(self):
+        self.assertEqual(self.meal.filter_by_main_ingredient(self.ing), self.exp)
+
+    def setUp(self):
+        self.meal = MealAPI()
+
+
+@parameterized_class(('inp', 'exp'), [
+    (2115, TypeError),
+    ([], TypeError)
+])
+class MealAPIFilterByMainIngredientRaises(unittest.TestCase):
+    def test_filter_by_main_ingredient_raises(self):
+        self.assertRaises(self.exp, self.meal.filter_by_main_ingredient, self.inp)
+
+    def setUp(self):
+        self.meal = MealAPI()
