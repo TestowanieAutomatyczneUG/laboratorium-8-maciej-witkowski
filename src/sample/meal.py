@@ -9,3 +9,13 @@ class MealAPI:
         if result['meals'] is None:
             return None
         return result
+
+    def list_all_meals_by_first_letter(self, letter):
+        if not isinstance(letter, str):
+            raise TypeError("Letter must be of string type!")
+        if len(letter) == 0 or len(letter) > 1:
+            raise ValueError("Wrong input length!")
+        result = requests.get(f'https://www.themealdb.com/api/json/v1/1/search.php?f={letter}').json()
+        if result['meals'] is None:
+            return None
+        return result
