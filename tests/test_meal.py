@@ -111,3 +111,12 @@ class MealAPILookupASingleRandomMealTests(unittest.TestCase):
 
     def setUp(self):
         self.meal = MealAPI()
+
+
+class MealAPIListAllMealCategoriesTests(unittest.TestCase):
+    def test_list_all_meal_categories_tests_0(self):
+        categories = self.meal.list_all_meal_categories()
+        self.assertEqual(len(categories['categories']), 14)
+
+    def setUp(self):
+        self.meal = MealAPI()
