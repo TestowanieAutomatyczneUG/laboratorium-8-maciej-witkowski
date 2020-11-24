@@ -102,3 +102,12 @@ class MealAPILookupFullMealDetailsByIdRaises(unittest.TestCase):
 
     def setUp(self):
         self.meal = MealAPI()
+
+
+class MealAPILookupASingleRandomMealTests(unittest.TestCase):
+    def test_lookup_a_single_random_meal_tests_0(self):
+        meal = self.meal.lookup_a_single_random_meal()
+        self.assertEqual(len(meal['meals']), 1)
+
+    def setUp(self):
+        self.meal = MealAPI()
